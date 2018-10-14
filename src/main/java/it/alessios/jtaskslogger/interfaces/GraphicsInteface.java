@@ -9,5 +9,5 @@ package it.alessios.jtaskslogger.interfaces;
  */
 public interface GraphicsInteface {
 
-	public void initializeUI();
+	public void initializeUI() throws Exception;
 }
