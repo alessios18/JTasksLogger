@@ -28,7 +28,7 @@ public class AddCurrentTaskListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Task t = (Task) parent.getTaskList().getSelectedItem();
 		TaskManager.getinstance().addCurrentTask(t);
-		((TasksLoggerFrame)parent.getParent()).getpTasklist().updateListpane();
+		((TasksLoggerFrame)parent.getParentContainer()).getpTasklist().updateListpane();
 	}
 
 }

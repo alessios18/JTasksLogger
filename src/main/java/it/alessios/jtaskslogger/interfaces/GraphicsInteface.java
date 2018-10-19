@@ -10,4 +10,6 @@ package it.alessios.jtaskslogger.interfaces;
 public interface GraphicsInteface {
 
 	public void initializeUI() throws Exception;
+	
+	public GraphicsInteface getParentContainer();
 }

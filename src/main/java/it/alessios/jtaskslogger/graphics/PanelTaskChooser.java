@@ -37,7 +37,7 @@ public class PanelTaskChooser extends JPanel implements GraphicsInteface{
 	private TasksLoggerFrame parent;
 	private JComboBox<Task> taskList;
 	private JButton addTask;
-	//private JButton newTask;
+	private JButton newTask;
 	
 	public PanelTaskChooser(TasksLoggerFrame parent) throws Exception {
 		super();
@@ -48,19 +48,12 @@ public class PanelTaskChooser extends JPanel implements GraphicsInteface{
 	public void initializeUI() throws Exception{
 		Task[] elements = DataStorage.getinstance().getTaskList();
 		taskList = new JComboBox<Task>(elements);
-		JButton newTask;
-		//this.setLayout(new GridLayout(1, 3));
-		//this.add(taskList);
-//		addTask = new JButton("Add task");		
-////		addTask.addActionListener(new AddCurrentTaskListener(this));
-//		addTask.addActionListener(new ActionListener() {
-//			
-//			public void actionPerformed(ActionEvent e) {
-//				JOptionPane.showMessageDialog(null, "ascas", "ascas", JOptionPane.INFORMATION_MESSAGE);
-//				
-//			}
-//		});
-//		this.add(addTask);
+		this.setLayout(new GridLayout(1, 3));
+		
+		this.add(taskList);
+		addTask = new JButton("Add task");		
+		addTask.addActionListener(new AddCurrentTaskListener(this));
+		this.add(addTask);
 		newTask = new JButton("New task");
 		newTask.addActionListener(new NewTaskListener(this));
 		this.add(newTask);
@@ -74,12 +67,12 @@ public class PanelTaskChooser extends JPanel implements GraphicsInteface{
 	    }
 	}
 
-	public TasksLoggerFrame getParent() {
-		return parent;
-	}
-
 	public JComboBox<Task> getTaskList() {
 		return taskList;
+	}
+
+	public GraphicsInteface getParentContainer() {
+		return parent;
 	}
 
 	

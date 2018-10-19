@@ -71,4 +71,8 @@ public class PanelTaskList extends JPanel implements GraphicsInteface {
 			list.repaint();
 		}
 	}
+
+	public GraphicsInteface getParentContainer() {
+		return this.parent;
+	}
 }

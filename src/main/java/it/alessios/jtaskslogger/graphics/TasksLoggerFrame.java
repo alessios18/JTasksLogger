@@ -9,8 +9,12 @@ import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import it.alessios.jtaskslogger.interfaces.GraphicsInteface;
 
@@ -39,18 +43,18 @@ public class TasksLoggerFrame extends JFrame implements GraphicsInteface{
 	public void initializeUI() throws Exception {
 		this.setTitle("JTasksLogger");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setFocusable(true);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int sheight = screenSize.height/2;
 		int swidth = screenSize.width/2;
 		this.setLocation(swidth - (width/2),  sheight - (height/2));
 		//this.setSize(width, height);
 		this.setLayout(new BorderLayout());
-		
 		pTaskChooser = new PanelTaskChooser(this);
 		this.add(pTaskChooser,BorderLayout.NORTH);
 //		
-//		pTasklist = new PanelTaskList(this);
-//		this.add(pTasklist,BorderLayout.CENTER);
+		pTasklist = new PanelTaskList(this);
+		this.add(pTasklist,BorderLayout.CENTER);
 		
 		this.pack();
 	}
@@ -77,6 +81,11 @@ public class TasksLoggerFrame extends JFrame implements GraphicsInteface{
 
 	public PanelTaskList getpTasklist() {
 		return pTasklist;
+	}
+
+	public GraphicsInteface getParentContainer() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
