@@ -24,6 +24,12 @@ import it.alessios.jtaskslogger.taskmanager.TaskManager;
  */
 public class PanelTaskList extends JPanel implements GraphicsInteface {
 	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8118172287394724205L;
+
 	TasksLoggerFrame parent;
 	
 	JPanel list = null;
@@ -31,6 +37,7 @@ public class PanelTaskList extends JPanel implements GraphicsInteface {
 	public static TaskManager manger = TaskManager.getinstance();
 	
 	public PanelTaskList(TasksLoggerFrame parent) {
+		super();
 		this.parent = parent;
 		initializeUI();
 	}
@@ -39,7 +46,7 @@ public class PanelTaskList extends JPanel implements GraphicsInteface {
 	 * @see it.alessios.jtaskslogger.interfaces.GraphicsInteface#initializeUI()
 	 */
 	public void initializeUI(){
-		this.setPreferredSize(new Dimension(300, 250));
+		this.setMinimumSize(new Dimension(parent.getMWidth(), parent.getMHeight()));
 		list = new JPanel();
 		JScrollPane sc = new JScrollPane(list);
 		updateListpane();

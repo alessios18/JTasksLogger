@@ -22,6 +22,7 @@ public class NewTaskListener implements ActionListener {
 	PanelTaskChooser parent;
 	
 	public NewTaskListener(PanelTaskChooser parent) {
+		super();
 		this.parent = parent;
 	}
 	/* (non-Javadoc)
@@ -36,16 +37,12 @@ public class NewTaskListener implements ActionListener {
 			}
 			parent.reloadTaskList();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (UnsupportedOperatingSystemException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 

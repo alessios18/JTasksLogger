@@ -5,6 +5,9 @@ package it.alessios.jtaskslogger.graphics;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
@@ -16,8 +19,8 @@ import it.alessios.jtaskslogger.interfaces.GraphicsInteface;
  *
  */
 public class TasksLoggerFrame extends JFrame implements GraphicsInteface{
-	int width = 300;
-	int height = 300;
+	private int width = 300;
+	private int height = 300;
 
 	private PanelTaskChooser pTaskChooser = null;
 	private PanelTaskList pTasklist = null;
@@ -28,6 +31,7 @@ public class TasksLoggerFrame extends JFrame implements GraphicsInteface{
 	private static final long serialVersionUID = -5487248759818715800L;
 
 	public TasksLoggerFrame() throws Exception{
+		super();
 		initializeUI();
 		
 	}
@@ -38,32 +42,32 @@ public class TasksLoggerFrame extends JFrame implements GraphicsInteface{
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int sheight = screenSize.height/2;
 		int swidth = screenSize.width/2;
-		this.setSize(sheight-width/2, swidth - height/2);
-		this.setSize(width, height);
+		this.setLocation(swidth - (width/2),  sheight - (height/2));
+		//this.setSize(width, height);
 		this.setLayout(new BorderLayout());
 		
 		pTaskChooser = new PanelTaskChooser(this);
 		this.add(pTaskChooser,BorderLayout.NORTH);
-		
-		pTasklist = new PanelTaskList(this);
-		this.add(pTasklist,BorderLayout.CENTER);
+//		
+//		pTasklist = new PanelTaskList(this);
+//		this.add(pTasklist,BorderLayout.CENTER);
 		
 		this.pack();
 	}
 
-	public int getWidth() {
+	public int getMWidth() {
 		return width;
 	}
 
-	public void setWidth(int width) {
+	public void setMWidth(int width) {
 		this.width = width;
 	}
 
-	public int getHeight() {
+	public int getMHeight() {
 		return height;
 	}
 
-	public void setHeight(int height) {
+	public void setMHeight(int height) {
 		this.height = height;
 	}
 
@@ -74,6 +78,7 @@ public class TasksLoggerFrame extends JFrame implements GraphicsInteface{
 	public PanelTaskList getpTasklist() {
 		return pTasklist;
 	}
+	
 	
 	
 }

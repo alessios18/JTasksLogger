@@ -19,6 +19,7 @@ public class AddCurrentTaskListener implements ActionListener {
 	PanelTaskChooser parent;
 	
 	public AddCurrentTaskListener(PanelTaskChooser parent) {
+		super();
 		this.parent = parent;
 	}
 	/* (non-Javadoc)
