@@ -55,6 +55,7 @@ public class PanelTaskList extends JPanel implements GraphicsInteface {
 
 	public void updateListpane() {
 		list.setLayout(new GridLayout(manger.getCurrentTaskSize(), 1));
+		list.removeAll();
 		ArrayList<Task> tasks = manger.getTaskList();
 		for(int t = 0;t<tasks.size();t++) {
 			JPanel pTask = new JPanel();
@@ -68,7 +69,6 @@ public class PanelTaskList extends JPanel implements GraphicsInteface {
 			pBut.add(stop);
 			pTask.add(pBut,BorderLayout.EAST);			
 			list.add(pTask);
-			list.repaint();
 		}
 	}
 
