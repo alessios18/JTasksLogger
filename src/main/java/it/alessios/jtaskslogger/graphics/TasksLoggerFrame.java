@@ -23,7 +23,7 @@ import it.alessios.jtaskslogger.interfaces.GraphicsInteface;
  *
  */
 public class TasksLoggerFrame extends JFrame implements GraphicsInteface{
-	private int width = 300;
+	private int width = 350;
 	private int height = 300;
 
 	private PanelTaskChooser pTaskChooser = null;

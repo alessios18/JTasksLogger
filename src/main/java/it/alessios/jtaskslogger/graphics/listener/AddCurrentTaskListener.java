@@ -6,6 +6,8 @@ package it.alessios.jtaskslogger.graphics.listener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 import it.alessios.jtaskslogger.graphics.PanelTaskChooser;
 import it.alessios.jtaskslogger.graphics.TasksLoggerFrame;
 import it.alessios.jtaskslogger.taskmanager.Task;
@@ -27,8 +29,12 @@ public class AddCurrentTaskListener implements ActionListener {
 	 */
 	public void actionPerformed(ActionEvent e) {
 		Task t = (Task) parent.getTaskList().getSelectedItem();
+		if (t!=null){
 		TaskManager.getinstance().addCurrentTask(t);
 		((TasksLoggerFrame)parent.getParentContainer()).getpTasklist().updateListpane();
+		}else{
+			JOptionPane.showMessageDialog(parent, "No task selected, please select one!");
+		}
 	}
 
 }

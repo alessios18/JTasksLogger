@@ -78,7 +78,7 @@ public class Task {
 	}
 
 	public void pauseTask() {
-		if(startTime == 0) {
+		if(startTime != 0) {
 			long endTime = System.currentTimeMillis();
 			life+=(endTime-startTime);
 			startTime = 0;
@@ -86,7 +86,7 @@ public class Task {
 	}
 	
 	public void stopTask() {
-		if(startTime == 0) {
+		if(startTime != 0) {
 			long endTime = System.currentTimeMillis();
 			life+=(endTime-startTime);
 			startTime = 0;

@@ -3,20 +3,23 @@
  */
 package it.alessios.jtaskslogger.graphics;
 
+import it.alessios.jtaskslogger.graphics.listener.PlayPauseListener;
+import it.alessios.jtaskslogger.interfaces.GraphicsInteface;
+import it.alessios.jtaskslogger.taskmanager.Task;
+import it.alessios.jtaskslogger.taskmanager.TaskManager;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Label;
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-
-import it.alessios.jtaskslogger.interfaces.GraphicsInteface;
-import it.alessios.jtaskslogger.taskmanager.Task;
-import it.alessios.jtaskslogger.taskmanager.TaskManager;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.border.EmptyBorder;
 
 /**
  * @author alessio
@@ -46,30 +49,42 @@ public class PanelTaskList extends JPanel implements GraphicsInteface {
 	 * @see it.alessios.jtaskslogger.interfaces.GraphicsInteface#initializeUI()
 	 */
 	public void initializeUI(){
-		this.setMinimumSize(new Dimension(parent.getMWidth(), parent.getMHeight()));
+		this.setLayout(new BorderLayout());
+		this.setPreferredSize(new Dimension(parent.getMWidth(), parent.getMHeight()));
 		list = new JPanel();
-		JScrollPane sc = new JScrollPane(list);
+		
 		updateListpane();
-		this.add(sc);
+		
 	}
 
 	public void updateListpane() {
-		list.setLayout(new GridLayout(manger.getCurrentTaskSize(), 1));
+		ArrayList<JButton> blist = new ArrayList<JButton>();
 		list.removeAll();
 		ArrayList<Task> tasks = manger.getTaskList();
+		int rows = tasks.size()<parent.getMHeight()/30?parent.getMHeight()/30:tasks.size();
+		list.setLayout(new GridLayout(rows, 1));
 		for(int t = 0;t<tasks.size();t++) {
 			JPanel pTask = new JPanel();
-			pTask.setLayout(new BorderLayout());
+			pTask.setBorder(new EmptyBorder(2, 2,2, 2));
+			pTask.setLayout(new GridLayout(1, 2));
 			Task tmp = tasks.get(t);
-			pTask.add(new Label(tmp.toString()),BorderLayout.CENTER);
+			pTask.add(new Label(tmp.toString()));
 			JButton startPause = new JButton("Play");
+			blist.add(startPause);
+			startPause.addActionListener(new PlayPauseListener(tmp,blist));
 			JButton stop = new JButton("Stop");
 			JPanel pBut=new JPanel();
 			pBut.add(startPause);
 			pBut.add(stop);
-			pTask.add(pBut,BorderLayout.EAST);			
+			pTask.add(pBut);			
 			list.add(pTask);
 		}
+		JScrollPane sc = new JScrollPane(list);
+		sc.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		this.removeAll();
+		this.add(sc,BorderLayout.CENTER);
+		this.revalidate();
+		this.repaint();
 	}
 
 	public GraphicsInteface getParentContainer() {

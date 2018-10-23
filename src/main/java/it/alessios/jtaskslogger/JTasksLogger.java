@@ -35,7 +35,7 @@ public class JTasksLogger {
 	static void displayJFrame(){
 		try {
 			TasksLoggerFrame frame = new TasksLoggerFrame();
-			showOnScreen(1, frame);
+			showOnScreen(0, frame);
 			frame.setVisible(true);
 		} catch (UnsupportedOperatingSystemException e) {
 			// TODO Auto-generated catch block
