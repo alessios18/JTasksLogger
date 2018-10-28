@@ -6,32 +6,96 @@ package it.alessios.jtaskslogger;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.io.IOException;
+import java.text.ParseException;
 
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 
+import it.alessios.jtaskslogger.controller.DataStorage;
+import it.alessios.jtaskslogger.model.Task;
 import it.alessios.jtaskslogger.utility.exceptions.UnsupportedOperatingSystemException;
 import it.alessios.jtaskslogger.view.swing.TasksLoggerFrame;
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 /**
  * @author alessio
  *
  */
-public class JTasksLogger {
+public class JTasksLogger extends Application{
 
+	private Stage primaryStage;
+	private AnchorPane rootLayout;
 	/**
 	 * @param args
 	 */
+	
+	
+	@Override
+    public void start(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+        this.primaryStage.setTitle("JTaskLogger");
+
+        try {
+			initRootLayout();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedOperatingSystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+    }
+	
+	/**
+     * Initializes the root layout.
+	 * @throws UnsupportedOperatingSystemException 
+	 * @throws ParseException 
+     */
+    public void initRootLayout() throws ParseException, UnsupportedOperatingSystemException {
+        try {
+            // Load root layout from fxml file.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(JTasksLogger.class.getResource("view/JtaskLoggerView.fxml"));
+            rootLayout = (AnchorPane) loader.load();
+            
+            // Show the scene containing the root layout.
+            Scene scene = new Scene(rootLayout);   
+            ComboBox<Task> taskList = (ComboBox<Task>) scene.lookup("#taskList");
+            ObservableList<Task> observer = FXCollections.observableList(DataStorage.getinstance().readTasksFile());
+            taskList.getItems().clear();
+            taskList.setItems(observer);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+	
+	
+	
 	public static void main(String[] args) {
-		// schedule this for the event dispatch thread (edt)
-	    SwingUtilities.invokeLater(new Runnable()
-	    {
-	      public void run()
-	      {
-	        displayJFrame();
-	      }
-	    });		
+		
+		launch(args);
+//		// schedule this for the event dispatch thread (edt)
+//	    SwingUtilities.invokeLater(new Runnable()
+//	    {
+//	      public void run()
+//	      {
+//	        displayJFrame();
+//	      }
+//	    });		
 	}
+	
+	
+	
 	static void displayJFrame(){
 		try {
 			TasksLoggerFrame frame = new TasksLoggerFrame();
