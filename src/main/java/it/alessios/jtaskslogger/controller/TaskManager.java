@@ -1,9 +1,11 @@
 /**
  * 
  */
-package it.alessios.jtaskslogger.taskmanager;
+package it.alessios.jtaskslogger.controller;
 
 import java.util.ArrayList;
+
+import it.alessios.jtaskslogger.model.Task;
 
 /**
  * @author alessio

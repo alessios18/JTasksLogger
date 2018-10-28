@@ -1,7 +1,7 @@
 /**
  * 
  */
-package it.alessios.jtaskslogger.interfaces;
+package it.alessios.jtaskslogger.view.swing.interfaces;
 
 /**
  * @author alessio

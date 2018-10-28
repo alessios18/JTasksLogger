@@ -1,12 +1,12 @@
 /**
  * 
  */
-package it.alessios.jtaskslogger.graphics;
+package it.alessios.jtaskslogger.view.swing;
 
-import it.alessios.jtaskslogger.graphics.listener.PlayPauseListener;
-import it.alessios.jtaskslogger.interfaces.GraphicsInteface;
-import it.alessios.jtaskslogger.taskmanager.Task;
-import it.alessios.jtaskslogger.taskmanager.TaskManager;
+import it.alessios.jtaskslogger.controller.TaskManager;
+import it.alessios.jtaskslogger.model.Task;
+import it.alessios.jtaskslogger.view.swing.interfaces.GraphicsInteface;
+import it.alessios.jtaskslogger.view.swing.listener.PlayPauseListener;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;

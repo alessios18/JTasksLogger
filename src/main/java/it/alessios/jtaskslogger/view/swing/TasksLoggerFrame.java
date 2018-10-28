@@ -1,7 +1,7 @@
 /**
  * 
  */
-package it.alessios.jtaskslogger.graphics;
+package it.alessios.jtaskslogger.view.swing;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -16,7 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import it.alessios.jtaskslogger.interfaces.GraphicsInteface;
+import it.alessios.jtaskslogger.view.swing.interfaces.GraphicsInteface;
 
 /**
  * @author alessio

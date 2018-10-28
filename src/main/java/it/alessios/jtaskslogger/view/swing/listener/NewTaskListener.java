@@ -1,7 +1,7 @@
 /**
  * 
  */
-package it.alessios.jtaskslogger.graphics.listener;
+package it.alessios.jtaskslogger.view.swing.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,9 +10,9 @@ import java.text.ParseException;
 
 import javax.swing.JOptionPane;
 
-import it.alessios.jtaskslogger.graphics.PanelTaskChooser;
-import it.alessios.jtaskslogger.taskmanager.Task;
+import it.alessios.jtaskslogger.model.Task;
 import it.alessios.jtaskslogger.utility.exceptions.UnsupportedOperatingSystemException;
+import it.alessios.jtaskslogger.view.swing.PanelTaskChooser;
 
 /**
  * @author alessio

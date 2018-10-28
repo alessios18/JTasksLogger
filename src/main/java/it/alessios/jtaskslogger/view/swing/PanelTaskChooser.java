@@ -1,7 +1,7 @@
 /**
  * 
  */
-package it.alessios.jtaskslogger.graphics;
+package it.alessios.jtaskslogger.view.swing;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -16,12 +16,12 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import it.alessios.jtaskslogger.datastorage.DataStorage;
-import it.alessios.jtaskslogger.graphics.listener.AddCurrentTaskListener;
-import it.alessios.jtaskslogger.graphics.listener.NewTaskListener;
-import it.alessios.jtaskslogger.interfaces.GraphicsInteface;
-import it.alessios.jtaskslogger.taskmanager.Task;
+import it.alessios.jtaskslogger.controller.DataStorage;
+import it.alessios.jtaskslogger.model.Task;
 import it.alessios.jtaskslogger.utility.exceptions.UnsupportedOperatingSystemException;
+import it.alessios.jtaskslogger.view.swing.interfaces.GraphicsInteface;
+import it.alessios.jtaskslogger.view.swing.listener.AddCurrentTaskListener;
+import it.alessios.jtaskslogger.view.swing.listener.NewTaskListener;
 
 /**
  * @author alessio

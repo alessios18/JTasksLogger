@@ -1,7 +1,7 @@
 /**
  * 
  */
-package it.alessios.jtaskslogger.datastorage;
+package it.alessios.jtaskslogger.controller;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import it.alessios.jtaskslogger.taskmanager.Task;
+import it.alessios.jtaskslogger.model.Task;
 import it.alessios.jtaskslogger.utility.OsCheck;
 import it.alessios.jtaskslogger.utility.exceptions.UnsupportedOperatingSystemException;
 

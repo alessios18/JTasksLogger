@@ -1,15 +1,15 @@
 /**
  * 
  */
-package it.alessios.jtaskslogger.graphics.listener;
-
-import it.alessios.jtaskslogger.taskmanager.Task;
+package it.alessios.jtaskslogger.view.swing.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+
+import it.alessios.jtaskslogger.model.Task;
 
 /**
  * @author alessio

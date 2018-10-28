@@ -10,8 +10,8 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-import it.alessios.jtaskslogger.graphics.TasksLoggerFrame;
 import it.alessios.jtaskslogger.utility.exceptions.UnsupportedOperatingSystemException;
+import it.alessios.jtaskslogger.view.swing.TasksLoggerFrame;
 
 /**
  * @author alessio

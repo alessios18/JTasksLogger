@@ -1,12 +1,12 @@
 /**
  * 
  */
-package it.alessios.jtaskslogger.taskmanager;
+package it.alessios.jtaskslogger.model;
 
 import java.io.IOException;
 import java.util.Date;
 
-import it.alessios.jtaskslogger.datastorage.DataStorage;
+import it.alessios.jtaskslogger.controller.DataStorage;
 import it.alessios.jtaskslogger.utility.exceptions.UnsupportedOperatingSystemException;
 
 /**
