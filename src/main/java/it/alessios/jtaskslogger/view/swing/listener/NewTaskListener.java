@@ -32,7 +32,7 @@ public class NewTaskListener implements ActionListener {
 		try {
 			String taskName = JOptionPane.showInputDialog(parent, "Task Name: ", "New Task", JOptionPane.OK_CANCEL_OPTION);
 			if(taskName != null) {
-				Task task = new Task(taskName);
+				Task task = new Task("taskName");
 				task.save();
 			}
 			parent.reloadTaskList();
