@@ -31,6 +31,7 @@ public class ListPane {
 	private Scene scene = null;
 	
 	private JTasksLogger mainApp;
+	private ListPaneController controller;
 	
 	public ListPane(JTasksLogger mainApp) throws ParseException, UnsupportedOperatingSystemException {
 		this.mainApp = mainApp;
@@ -47,7 +48,7 @@ public class ListPane {
             // Show the scene containing the root layout.
             scene = new Scene(rootLayout);   
             
-            ListPaneController controller = loader.getController();
+            controller = loader.getController();
             controller.setMainApp(mainApp);
             
         } catch (IOException e) {
@@ -55,7 +56,13 @@ public class ListPane {
         }
     }
 	
-	
+	public void updateList() throws ParseException, UnsupportedOperatingSystemException {
+		getController().updateList();
+	}
+
+	public ListPaneController getController() {
+		return controller;
+	}
 
 	public Scene getScene() {
 		return scene;

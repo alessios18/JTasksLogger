@@ -26,13 +26,15 @@ import javafx.scene.layout.Pane;
  *
  */
 public class ChooserPanelDrawer {
+	private JTasksLogger mainApp;
 	private AnchorPane rootLayout = null;
 	private Scene scene = null;
 	ObservableList<Task> observer;
 	
 	ChooserPaneController controller;
 	
-	public ChooserPanelDrawer() throws ParseException, UnsupportedOperatingSystemException {
+	public ChooserPanelDrawer(JTasksLogger mainApp) throws ParseException, UnsupportedOperatingSystemException {
+		this.mainApp = mainApp;
 		initRootLayout();
 	}
 	
@@ -46,7 +48,7 @@ public class ChooserPanelDrawer {
             // Show the scene containing the root layout.
             scene = new Scene(rootLayout);   
             controller = loader.getController();
-            controller.setMainApp(this);
+            controller.setMainApp(mainApp,this);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -63,7 +65,11 @@ public class ChooserPanelDrawer {
 		observer = FXCollections.observableList(DataStorage.getinstance().readTasksFile());
 		return observer;
 	}
-	
+		
+	public ChooserPaneController getController() {
+		return controller;
+	}
+
 	public void reloadTaskList() throws IOException, ParseException, UnsupportedOperatingSystemException {
 		controller.reloadTaskList();
 	}

@@ -5,14 +5,13 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.alessios.jtaskslogger.view.controllers.ChooserPaneController">
    <children>
       <ComboBox id="taskList" fx:id="taskList" layoutX="14.0" layoutY="12.0" prefHeight="25.0" prefWidth="95.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="191.0" />
       <AnchorPane layoutX="386.0" prefHeight="48.0" prefWidth="200.0" AnchorPane.rightAnchor="14.0">
          <children>
-            <Button id="newTast" fx:id="newTask" layoutX="124.0" layoutY="12.0" mnemonicParsing="false" text="New Task" />
-            <Button id="addTask" layoutX="38.0" layoutY="12.0" mnemonicParsing="false" text="Add Task" />
+            <Button id="newTask" fx:id="newTask" layoutX="124.0" layoutY="12.0" mnemonicParsing="false" text="New Task" />
+            <Button id="addTaskBtn" fx:id="addTaskBtn" layoutX="38.0" layoutY="12.0" mnemonicParsing="false" text="Add Task" />
          </children>
       </AnchorPane>
    </children>

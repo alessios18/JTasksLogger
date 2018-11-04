@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import it.alessios.jtaskslogger.controller.TaskManager;
+import it.alessios.jtaskslogger.model.Task;
 import it.alessios.jtaskslogger.utility.exceptions.UnsupportedOperatingSystemException;
 import it.alessios.jtaskslogger.view.MainView;
 import it.alessios.jtaskslogger.view.TaskElementView;
@@ -83,20 +85,10 @@ public class JTasksLogger extends Application{
 	static void runApp() {
 		launch(new String[0]);
 	}
-
-	public ObservableList<AnchorPane> getList() throws ParseException, UnsupportedOperatingSystemException {
-		ArrayList<AnchorPane> list = new ArrayList<AnchorPane>();
-		
-		list.add((AnchorPane) new TaskElementView().getPane());
-		list.add((AnchorPane) new TaskElementView().getPane());
-		list.add((AnchorPane) new TaskElementView().getPane());
-		list.add((AnchorPane) new TaskElementView().getPane());
-		
-		ObservableList<AnchorPane> observer = FXCollections.observableList(list);
-		//elTaskList.getItems().clear();
-		return (observer);
+	
+	public void updateList() throws ParseException, UnsupportedOperatingSystemException {
+		mainView.updateList();
 	}
-
 
 	static void displayJFrame(){
 		try {

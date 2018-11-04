@@ -33,7 +33,7 @@ public class MainView {
 	public void initRootLayout() throws ParseException, UnsupportedOperatingSystemException {
         try {
         	listView = new ListPane(mainApp);
-        	chooserPane = new ChooserPanelDrawer();
+        	chooserPane = new ChooserPanelDrawer(mainApp);
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(JTasksLogger.class.getResource(ConstantsLibrary.FXML_PATH+"MainView.fxml"));
@@ -46,6 +46,10 @@ public class MainView {
             e.printStackTrace();
         }
     }
+	
+	public void updateList() throws ParseException, UnsupportedOperatingSystemException {
+		listView.updateList();
+	}
 	
 	public Scene getScene() {
 		return scene;
