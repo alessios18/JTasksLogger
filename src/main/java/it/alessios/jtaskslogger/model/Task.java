@@ -3,109 +3,71 @@
  */
 package it.alessios.jtaskslogger.model;
 
-import java.io.IOException;
-import java.util.Date;
+import java.time.LocalDate;
 
-import it.alessios.jtaskslogger.controller.DataStorage;
-import it.alessios.jtaskslogger.utility.exceptions.UnsupportedOperatingSystemException;
+import it.alessios.jtaskslogger.util.IdStacker;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 /**
  * @author alessio
  *
  */
 public class Task {
-	public int id = 0;
-	private String name = null;
-	private long life = 0; 
-	private Date date = null;
-	private Date lastDate = null;
+	private final IntegerProperty idTask;
+	private final StringProperty nameTask;
+	private final ObjectProperty<LocalDate> creationDate;
 
-	private long startTime = 0;
-
-	//create task
-	public Task(String name) throws Exception{
-		this.id = DataStorage.getinstance().getNewTaskid();
-		this.name = name;
-		this.date = new Date();
+	public Task(String nameTask) {
+		super();
+		this.idTask = new SimpleIntegerProperty(IdStacker.getInstance().getId());
+		this.nameTask = new SimpleStringProperty(nameTask);
+		this.creationDate = new SimpleObjectProperty<LocalDate>(LocalDate.now());
 	}
 	
-	public Task(int id,String name) {
-		this.id = id;
-		this.name = name;
-		this.date = new Date();
+	public Task(int id,String nameTask,LocalDate creationDate) {
+		super();
+		this.idTask = new SimpleIntegerProperty(id);
+		this.nameTask = new SimpleStringProperty(nameTask);
+		this.creationDate = new SimpleObjectProperty<LocalDate>(creationDate);
 	}
 
-	//load task
-	public Task(int id,String name,long life) {
-		this.id = id;
-		this.name = name;
-		this.life = life;
-		this.date = new Date();
-	}
-	public Task(int id,String name,long life,Date date) {
-		this.id = id;
-		this.name = name;
-		this.life = life;
-		this.date = date;
+	public void setIdTask(int id) {
+		getIdTaskProperty().set(id);
 	}
 
-	public String getName() {
-		return name;
+	public int getIdTask() {
+		return getIdTaskProperty().get();
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNameTask(String name) {
+		getNameTaskProperty().set(name);
 	}
 
-	public long getLife() {
-		return life;
-	}
-
-	public void setLife(long life) {
-		this.life = life;
-	}
-
-	public void startTask() {
-		startTime = System.currentTimeMillis();
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
-	public void pauseTask() {
-		if(startTime != 0) {
-			long endTime = System.currentTimeMillis();
-			life+=(endTime-startTime);
-			startTime = 0;
-		}
+	public String getNameTask() {
+		return getNameTaskProperty().get();
 	}
 	
-	public void stopTask() {
-		if(startTime != 0) {
-			long endTime = System.currentTimeMillis();
-			life+=(endTime-startTime);
-			startTime = 0;
-		}
+	public void setCreationDate(LocalDate creationDate) {
+		getCreationDateProperty().set(creationDate);
 	}
 
-	@Override
-	public String toString() {
-		return getName();
-	}	
-	
-	public void save() throws IOException, UnsupportedOperatingSystemException {
-		DataStorage.getinstance().saveTask(this);
+	public LocalDate getCreationDate() {
+		return getCreationDateProperty().get();
 	}
 
-	public String getStorageString() {
-		if(lastDate == null) {
-			lastDate = new Date();
-		}
-		return id+";"+name+";"+DataStorage.dateToString(lastDate)+"\n";
+	public IntegerProperty getIdTaskProperty() {
+		return idTask;
+	}
+	public StringProperty getNameTaskProperty() {
+		return nameTask;
+	}
+	public ObjectProperty<LocalDate> getCreationDateProperty() {
+		return creationDate;
 	}
 }
+
