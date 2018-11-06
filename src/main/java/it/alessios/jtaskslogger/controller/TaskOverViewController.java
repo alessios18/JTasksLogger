@@ -112,10 +112,10 @@ public class TaskOverViewController {
 				mainApp.saveTaskDataToFile(DataStorage.getinstance().getTaskFile());
 			} catch (UnsupportedOperatingSystemException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				ExceptionDialog.showException(e);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				ExceptionDialog.showException(e);
 			}
 		}
 	}

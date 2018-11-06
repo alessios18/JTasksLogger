@@ -79,7 +79,7 @@ public class RunningTaskControllers {
 					Thread.sleep(1000);
 				}
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				ExceptionDialog.showException(e);
 			}
 		}
 	}
@@ -109,10 +109,10 @@ public class RunningTaskControllers {
 				mainApp.saveRunningTaskDataToFile(DataStorage.getinstance().getCurrentRunningTaskFile());
 			} catch (UnsupportedOperatingSystemException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				ExceptionDialog.showException(e);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				ExceptionDialog.showException(e);
 			}
 		}
 	}
