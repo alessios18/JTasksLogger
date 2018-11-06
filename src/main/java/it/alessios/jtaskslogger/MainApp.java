@@ -15,6 +15,7 @@ import it.alessios.jtaskslogger.model.Task;
 import it.alessios.jtaskslogger.model.wrapper.RunningTaskDataWrapper;
 import it.alessios.jtaskslogger.model.wrapper.TaskDataWrapper;
 import it.alessios.jtaskslogger.util.DataStorage;
+import it.alessios.jtaskslogger.view.ExceptionDialog;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -43,10 +44,10 @@ public class MainApp extends Application {
 			DataStorage.getinstance().checkFiles();
 		} catch (UnsupportedOperatingSystemException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ExceptionDialog.showException(e);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ExceptionDialog.showException(e);
 		}
 	}
 
@@ -87,11 +88,11 @@ public class MainApp extends Application {
 					saveRunningTaskDataToFile(DataStorage.getinstance().getCurrentRunningTaskFile());
 				} catch (UnsupportedOperatingSystemException | IOException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					ExceptionDialog.showException(e);
 				}
 			});
 		} catch (IOException | UnsupportedOperatingSystemException e) {
-			e.printStackTrace();
+			ExceptionDialog.showException(e);
 		}
 
 
@@ -112,7 +113,7 @@ public class MainApp extends Application {
 			controller.setMainApp(this);
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			ExceptionDialog.showException(e);
 		}
 	}
 
@@ -140,7 +141,7 @@ public class MainApp extends Application {
 
 			return controller.isOkClicked();
 		} catch (IOException e) {
-			e.printStackTrace();
+			ExceptionDialog.showException(e);
 			return false;
 		}
 	}
