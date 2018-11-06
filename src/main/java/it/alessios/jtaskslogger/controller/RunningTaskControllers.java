@@ -3,8 +3,12 @@
  */
 package it.alessios.jtaskslogger.controller;
 
+import java.io.IOException;
+
 import it.alessios.jtaskslogger.MainApp;
+import it.alessios.jtaskslogger.exceptions.UnsupportedOperatingSystemException;
 import it.alessios.jtaskslogger.model.RunningTask;
+import it.alessios.jtaskslogger.util.DataStorage;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -31,8 +35,8 @@ public class RunningTaskControllers {
 
 	private RunningTask runtask;
 
-	private static Image playIcon = new Image("file:resources/images/play_icon.png");
-	private static Image pauseIcon = new Image("file:resources/images/pause_icon.png");
+	private static Image playIcon = null;
+	private static Image pauseIcon = null;
 
 	private ThreadRefresher tr = null;
 
@@ -40,22 +44,24 @@ public class RunningTaskControllers {
 	private MainApp mainApp;
 
 	public RunningTaskControllers() {
+		if(playIcon == null || pauseIcon == null) {
+			playIcon = new Image(getClass().getResourceAsStream("/images/play_icon.png"));
+			pauseIcon = new Image(getClass().getResourceAsStream("/images/pause_icon.png"));
+		}
 	}
 
 	@FXML
 	private void initialize() {
 	}
 
-	public void setMainApp(MainApp mainApp) {
-		this.mainApp = mainApp;
-	}
 
-	public void setRunningTask(RunningTask runtask) {
+	public void setMainAppRunningTask(MainApp mainApp,RunningTask runtask) {
+		this.mainApp = mainApp;
 		this.runtask = runtask;
 		ImageView playIconView = new ImageView(playIcon);
 		toggle.setGraphic(playIconView);
 		toggle.setText("");
-		taskName.setText(runtask.getTask().getNameTask());
+		taskName.setText(mainApp.getTaskById(runtask.getIdTask()).getNameTask());
 		taskLife.setText(runtask.getFormattedLife(runtask.getLife()));
 		if(runtask.isRunning()) {
 			play();
@@ -99,6 +105,17 @@ public class RunningTaskControllers {
 		}else {
 			runtask.pauseTask();
 			pause();
+			try {
+				mainApp.saveRunningTaskDataToFile(DataStorage.getinstance().getCurrentRunningTaskFile());
+			} catch (UnsupportedOperatingSystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
+	
+	
 }

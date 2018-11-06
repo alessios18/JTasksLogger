@@ -34,8 +34,7 @@ public class TaskListCell extends ListCell<RunningTask> {
          if(empty) {
         	 setGraphic(null);
          }else {
-        	 runningTaskCell.setRunningTask(item);
-        	 runningTaskCell.setMainApp(mainApp);
+        	 runningTaskCell.setMainAppRunningTask(mainApp,item);
         	 setGraphic(runningTaskCell.getView());
          }
 	}

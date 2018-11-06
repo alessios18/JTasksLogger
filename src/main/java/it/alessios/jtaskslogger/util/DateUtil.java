@@ -14,10 +14,14 @@ import java.time.format.DateTimeParseException;
 public class DateUtil {
 	/** The date pattern that is used for conversion. Change as you wish. */
     private static final String DATE_PATTERN = "dd.MM.yyyy";
+    private static final String FILE_DATE_PATTERN = "yyyyMMdd";
     
     /** The date formatter. */
     private static final DateTimeFormatter DATE_FORMATTER = 
             DateTimeFormatter.ofPattern(DATE_PATTERN);
+    
+    private static final DateTimeFormatter FILE_DATE_FORMATTER = 
+            DateTimeFormatter.ofPattern(FILE_DATE_PATTERN);
     
     /**
      * Returns the given date as a well formatted String. The above defined 
@@ -31,6 +35,13 @@ public class DateUtil {
             return null;
         }
         return DATE_FORMATTER.format(date);
+    }
+    
+    public static String fileFormat(LocalDate date) {
+        if (date == null) {
+            return null;
+        }
+        return FILE_DATE_FORMATTER.format(date);
     }
 
     /**

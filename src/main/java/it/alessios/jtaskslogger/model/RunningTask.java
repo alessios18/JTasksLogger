@@ -8,6 +8,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import it.alessios.jtaskslogger.util.IdAdapter;
 import it.alessios.jtaskslogger.util.IdStacker;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
@@ -20,34 +23,44 @@ import javafx.beans.property.SimpleObjectProperty;
  */
 public class RunningTask {
 	private final IntegerProperty idRunningTask;
-	private final ObjectProperty<Task> task;
+	private final IntegerProperty idTask;
 	private final ObjectProperty<Long> life;
 	
 	private long startTime = 0;
 	
 	private boolean isRunning = false;
 	
+	public RunningTask() {
+		super();
+		this.idTask = new SimpleIntegerProperty();
+		this.idRunningTask = new SimpleIntegerProperty();
+		this.life = new SimpleObjectProperty<Long>(0L);
+	}
+	
 	public RunningTask(Task task) {
 		super();
-		this.task = new SimpleObjectProperty<Task>(task);
+		this.idTask = new SimpleIntegerProperty(task.getIdTask());
 		this.idRunningTask = new SimpleIntegerProperty(IdStacker.getInstance().getId());
 		this.life = new SimpleObjectProperty<Long>(0L);
 	}
 	
+	@XmlJavaTypeAdapter(IdAdapter.class)	
 	public void setIdRunningTask(int id) {
 		getIdRunningTaskProperty().set(id);
 	}
 
-	public int getIdRunningTask() {
+
+	@XmlJavaTypeAdapter(IdAdapter.class)	
+	public Integer getIdRunningTask() {
 		return getIdRunningTaskProperty().get();
 	}
 
-	public void setTask(Task task) {
-		getTaskProperty().set(task);
+	public void setIdTask(Integer idTask) {
+		getIdTaskProperty().set(idTask);
 	}
 
-	public Task getTask() {
-		return getTaskProperty().get();
+	public int getIdTask() {
+		return getIdTaskProperty().get();
 	}
 	
 	public void setLife(Long life) {
@@ -61,8 +74,8 @@ public class RunningTask {
 	public IntegerProperty getIdRunningTaskProperty() {
 		return idRunningTask;
 	}
-	public ObjectProperty<Task> getTaskProperty() {
-		return task;
+	public IntegerProperty getIdTaskProperty() {
+		return idTask;
 	}
 	public ObjectProperty<Long> getLifeProperty() {
 		return life;

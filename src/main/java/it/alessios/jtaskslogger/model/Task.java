@@ -5,7 +5,11 @@ package it.alessios.jtaskslogger.model;
 
 import java.time.LocalDate;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import it.alessios.jtaskslogger.util.IdAdapter;
 import it.alessios.jtaskslogger.util.IdStacker;
+import it.alessios.jtaskslogger.util.LocalDateAdapter;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -21,6 +25,13 @@ public class Task {
 	private final IntegerProperty idTask;
 	private final StringProperty nameTask;
 	private final ObjectProperty<LocalDate> creationDate;
+	
+	public Task() {
+		super();
+		this.idTask = new SimpleIntegerProperty(IdStacker.getInstance().getId());
+		this.nameTask = new SimpleStringProperty("");
+		this.creationDate = new SimpleObjectProperty<LocalDate>(LocalDate.now());
+	}
 
 	public Task(String nameTask) {
 		super();
@@ -35,12 +46,13 @@ public class Task {
 		this.nameTask = new SimpleStringProperty(nameTask);
 		this.creationDate = new SimpleObjectProperty<LocalDate>(creationDate);
 	}
-
-	public void setIdTask(int id) {
+	
+	@XmlJavaTypeAdapter(IdAdapter.class)	
+	public void setIdTask(Integer id) {
 		getIdTaskProperty().set(id);
 	}
 
-	public int getIdTask() {
+	public Integer getIdTask() {
 		return getIdTaskProperty().get();
 	}
 
@@ -55,7 +67,8 @@ public class Task {
 	public void setCreationDate(LocalDate creationDate) {
 		getCreationDateProperty().set(creationDate);
 	}
-
+	
+	@XmlJavaTypeAdapter(LocalDateAdapter.class)	
 	public LocalDate getCreationDate() {
 		return getCreationDateProperty().get();
 	}

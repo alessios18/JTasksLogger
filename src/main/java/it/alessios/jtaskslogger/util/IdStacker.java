@@ -8,24 +8,30 @@ package it.alessios.jtaskslogger.util;
  *
  */
 public class IdStacker {
-	
+
 	private static int id = 0;
-	
+
 	private static IdStacker stacker = null;
 	private IdStacker() {
-		
+
 	}
-	
+
 	public static IdStacker getInstance() {
 		if(stacker == null) {
 			stacker = new IdStacker();
 		}
 		return stacker;
 	}
-	
+
 	public int getId() {
 		int currentId = id;
 		id++;
 		return currentId;
+	}
+
+	public void incrementIdStack(int newId) {
+		if(newId>id) {
+			id = newId +1;
+		}
 	}
 }
