@@ -17,7 +17,9 @@ import it.alessios.jtaskslogger.exceptions.UnsupportedOperatingSystemException;
  */
 public class DataStorage {
 	private static final String TASKS = "tasks.xml";
-	private static final String RUNNINGTASK = "runningtasks.xml"; 
+	private static final String RUNNINGTASK = "runningtasks.xml";
+	
+	private static final String JTASKSLOGGER_FOLDER = ".JTasksTool"; 
 
 	private static File tasks;
 
@@ -42,30 +44,30 @@ public class DataStorage {
 			if(!root.exists()) {
 				root.mkdirs();
 			}
-			tasks = new File(getRootPath()+TASKS);
-			if(!tasks.exists()) {
-				BufferedWriter writer = new BufferedWriter(new FileWriter(tasks));
-				writer.close();
-			}
+//			tasks = new File(getRootPath()+TASKS);
+//			if(!tasks.exists()) {
+//				BufferedWriter writer = new BufferedWriter(new FileWriter(tasks));
+//				writer.close();
+//			}
 		}else {
 			throw new UnsupportedOperatingSystemException();
 		}
-		File current = getCurrentRunningTaskFile();
-		if(!current.exists()) {
-			BufferedWriter writer = new BufferedWriter(new FileWriter(current));
-			writer.close();
-		}
+//		File current = getCurrentRunningTaskFile();
+//		if(!current.exists()) {
+//			BufferedWriter writer = new BufferedWriter(new FileWriter(current));
+//			writer.close();
+//		}
 	}
 
 	protected String getRootPath() {
 		String path = null;
 		if(OsCheck.OSType.Linux.equals(OsCheck.getOperatingSystemType())){
-			path = OsCheck.getUserHome()+OsCheck.getSeparator()+"JTasksTool"+OsCheck.getSeparator();
+			path = OsCheck.getUserHome()+OsCheck.getSeparator()+JTASKSLOGGER_FOLDER+OsCheck.getSeparator();
 		}else if(OsCheck.OSType.Windows.equals(OsCheck.getOperatingSystemType())) {
-			path = OsCheck.getUserHome()+OsCheck.getSeparator()+"JTasksTool"+OsCheck.getSeparator();
+			path = OsCheck.getUserHome()+OsCheck.getSeparator()+JTASKSLOGGER_FOLDER+OsCheck.getSeparator();
 		}else if(OsCheck.OSType.MacOS.equals(OsCheck.getOperatingSystemType()) 
 				|| OsCheck.OSType.Other.equals(OsCheck.getOperatingSystemType()) ) {
-			path = OsCheck.getUserHome()+OsCheck.getSeparator()+"JTasksTool"+OsCheck.getSeparator();
+			path = OsCheck.getUserHome()+OsCheck.getSeparator()+JTASKSLOGGER_FOLDER+OsCheck.getSeparator();
 		}
 		return path;
 	}

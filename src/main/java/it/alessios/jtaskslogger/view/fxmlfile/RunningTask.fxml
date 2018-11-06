@@ -5,7 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="mainPane" xmlns="http://javafx.com/javafx/8.0.191" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.alessios.jtaskslogger.controller.RunningTaskControllers">
+<AnchorPane fx:id="mainPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="it.alessios.jtaskslogger.controller.RunningTaskControllers">
    <children>
       <Label fx:id="taskName" layoutX="-4.0" layoutY="1.0" prefHeight="16.0" prefWidth="185.0" text="Task Name1111111111111111111111111111111" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="0.0" />
       <Label fx:id="taskLife" layoutX="45.0" layoutY="22.0" text="Current time" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="10.0" />
