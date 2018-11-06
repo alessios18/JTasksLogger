@@ -9,6 +9,7 @@ import it.alessios.jtaskslogger.MainApp;
 import it.alessios.jtaskslogger.exceptions.UnsupportedOperatingSystemException;
 import it.alessios.jtaskslogger.model.RunningTask;
 import it.alessios.jtaskslogger.util.DataStorage;
+import it.alessios.jtaskslogger.view.ExceptionDialog;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
