@@ -55,7 +55,7 @@ public class RunningTask {
 		return getIdRunningTaskProperty().get();
 	}
 
-	public void setIdTask(Integer idTask) {
+	public void setIdTask(int idTask) {
 		getIdTaskProperty().set(idTask);
 	}
 
