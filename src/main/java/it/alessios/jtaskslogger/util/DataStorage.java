@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import it.alessios.jtaskslogger.exceptions.UnsupportedOperatingSystemException;
 
@@ -44,19 +45,9 @@ public class DataStorage {
 			if(!root.exists()) {
 				root.mkdirs();
 			}
-//			tasks = new File(getRootPath()+TASKS);
-//			if(!tasks.exists()) {
-//				BufferedWriter writer = new BufferedWriter(new FileWriter(tasks));
-//				writer.close();
-//			}
 		}else {
 			throw new UnsupportedOperatingSystemException();
 		}
-//		File current = getCurrentRunningTaskFile();
-//		if(!current.exists()) {
-//			BufferedWriter writer = new BufferedWriter(new FileWriter(current));
-//			writer.close();
-//		}
 	}
 
 	protected String getRootPath() {
@@ -79,6 +70,23 @@ public class DataStorage {
 	public File getCurrentRunningTaskFile() {
 		LocalDate now = LocalDate.now();
 		return new File(getRootPath()+DateUtil.fileFormat(now)+"_"+RUNNINGTASK);
+	}
+	
+	public File getCurrentRunningTaskFile(LocalDate date) {
+		return new File(getRootPath()+DateUtil.fileFormat(date)+"_"+RUNNINGTASK);
+	}
+	
+	public ArrayList<File> getFilesByDates(LocalDate startDate,LocalDate endDate){
+		ArrayList<File> files = new ArrayList<>();
+		LocalDate current = startDate;
+		while(current.isEqual(endDate) || current.isBefore(endDate)) {
+			File file = getCurrentRunningTaskFile(current);
+			if(file.exists()) {
+				files.add(file);
+			}
+			current = current.plusDays(1);
+		}
+		return files;
 	}
 }
 

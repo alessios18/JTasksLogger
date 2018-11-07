@@ -4,10 +4,13 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import it.alessios.jtaskslogger.controller.ExportDialogController;
 import it.alessios.jtaskslogger.controller.NewTaskDialogController;
+import it.alessios.jtaskslogger.controller.RootPaneController;
 import it.alessios.jtaskslogger.controller.TaskOverViewController;
 import it.alessios.jtaskslogger.exceptions.UnsupportedOperatingSystemException;
 import it.alessios.jtaskslogger.model.RunningTask;
@@ -74,9 +77,9 @@ public class MainApp extends Application {
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
 
-			//            // Give the controller access to the main app.
-			//            RootLayoutController controller = loader.getController();
-			//            controller.setMainApp(this);
+			// Give the controller access to the main app.
+			RootPaneController controller = loader.getController();
+			controller.setMainApp(this);
 
 			primaryStage.show();
 
@@ -170,6 +173,39 @@ public class MainApp extends Application {
 		}
 		return null;
 	}
+	
+	public Task getTaskById(int id,ObservableList<Task> list) {
+		for(int i=0;i<list.size();i++){
+			if(list.get(i).getIdTask()==id) {
+				return list.get(i);
+			}
+		}
+		return null;
+	}
+
+	public void showExportDialog() throws IOException {
+		// Load the fxml file and create a new stage for the popup dialog.
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(MainApp.class.getResource(MainApp.FXML_FILE_PATH+"ExportDialog.fxml"));
+		AnchorPane page = (AnchorPane) loader.load();
+
+		// Create the dialog Stage.
+		Stage dialogStage = new Stage();
+		dialogStage.setTitle("Edit Person");
+		dialogStage.initModality(Modality.WINDOW_MODAL);
+		dialogStage.initOwner(primaryStage);
+		Scene scene = new Scene(page);
+		dialogStage.setScene(scene);
+
+		// Set the person into the controller.
+		ExportDialogController controller = loader.getController();
+		controller.setDialogStage(dialogStage);
+		controller.setMainApp(this);
+
+		// Show the dialog and wait until the user closes it
+		dialogStage.showAndWait();
+
+	}
 
 	/**
 	 * Saves the current tasks data to the specified file.
@@ -209,12 +245,7 @@ public class MainApp extends Application {
 	 */
 	public void loadTaskDataFromFile(File file) {
 		try {
-			JAXBContext context = JAXBContext
-					.newInstance(TaskDataWrapper.class);
-			Unmarshaller um = context.createUnmarshaller();
-
-			// Reading XML from the file and unmarshalling.
-			TaskDataWrapper wrapper = (TaskDataWrapper) um.unmarshal(file);
+			TaskDataWrapper wrapper = loadTask(file);
 
 			taskData.clear();
 			if(wrapper.getTasks()!= null) {
@@ -229,6 +260,16 @@ public class MainApp extends Application {
 
 			alert.showAndWait();
 		}
+	}
+
+	public TaskDataWrapper loadTask(File file) throws JAXBException {
+		JAXBContext context = JAXBContext
+				.newInstance(TaskDataWrapper.class);
+		Unmarshaller um = context.createUnmarshaller();
+
+		// Reading XML from the file and unmarshalling.
+		TaskDataWrapper wrapper = (TaskDataWrapper) um.unmarshal(file);
+		return wrapper;
 	}
 
 	public void saveRunningTaskDataToFile(File file) {
@@ -257,12 +298,7 @@ public class MainApp extends Application {
 
 	public void loadRunningTaskDataToFile(File file) {
 		try {
-			JAXBContext context = JAXBContext
-					.newInstance(RunningTaskDataWrapper.class);
-			Unmarshaller um = context.createUnmarshaller();
-
-			// Reading XML from the file and unmarshalling.
-			RunningTaskDataWrapper wrapper = (RunningTaskDataWrapper) um.unmarshal(file);
+			RunningTaskDataWrapper wrapper = loadRunningTask(file);
 
 			runningTaskData.clear();
 			if(wrapper.getRunningTasks() != null) {
@@ -277,6 +313,16 @@ public class MainApp extends Application {
 
 			alert.showAndWait();
 		}
+	}
+
+	public RunningTaskDataWrapper loadRunningTask(File file) throws JAXBException {
+		JAXBContext context = JAXBContext
+				.newInstance(RunningTaskDataWrapper.class);
+		Unmarshaller um = context.createUnmarshaller();
+
+		// Reading XML from the file and unmarshalling.
+		RunningTaskDataWrapper wrapper = (RunningTaskDataWrapper) um.unmarshal(file);
+		return wrapper;
 	}
 
 }

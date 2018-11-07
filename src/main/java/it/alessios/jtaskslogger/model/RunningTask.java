@@ -5,6 +5,7 @@ package it.alessios.jtaskslogger.model;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -12,6 +13,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import it.alessios.jtaskslogger.util.IdAdapter;
 import it.alessios.jtaskslogger.util.IdStacker;
+import it.alessios.jtaskslogger.util.LocalDateAdapter;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -25,6 +27,7 @@ public class RunningTask {
 	private final IntegerProperty idRunningTask;
 	private final IntegerProperty idTask;
 	private final ObjectProperty<Long> life;
+	private final ObjectProperty<LocalDate> creationDate;
 	
 	private long startTime = 0;
 	
@@ -35,6 +38,7 @@ public class RunningTask {
 		this.idTask = new SimpleIntegerProperty();
 		this.idRunningTask = new SimpleIntegerProperty();
 		this.life = new SimpleObjectProperty<Long>(0L);
+		this.creationDate = new SimpleObjectProperty<LocalDate>(LocalDate.now());
 	}
 	
 	public RunningTask(Task task) {
@@ -42,6 +46,7 @@ public class RunningTask {
 		this.idTask = new SimpleIntegerProperty(task.getIdTask());
 		this.idRunningTask = new SimpleIntegerProperty(IdStacker.getInstance().getId());
 		this.life = new SimpleObjectProperty<Long>(0L);
+		this.creationDate = new SimpleObjectProperty<LocalDate>(LocalDate.now());
 	}
 	
 	@XmlJavaTypeAdapter(IdAdapter.class)	
@@ -70,6 +75,13 @@ public class RunningTask {
 	public Long getLife() {
 		return getLifeProperty().get();
 	}
+	public void setCreationDate(LocalDate creationDate) {
+		getCreationDateProperty().set(creationDate);
+	}
+	@XmlJavaTypeAdapter(LocalDateAdapter.class)	
+	public LocalDate getCreationDate() {
+		return getCreationDateProperty().get();
+	}
 
 	public IntegerProperty getIdRunningTaskProperty() {
 		return idRunningTask;
@@ -79,6 +91,9 @@ public class RunningTask {
 	}
 	public ObjectProperty<Long> getLifeProperty() {
 		return life;
+	}
+	public ObjectProperty<LocalDate> getCreationDateProperty() {
+		return creationDate;
 	}
 	
 	public void startTask() {
