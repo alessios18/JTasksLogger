@@ -34,7 +34,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public class MainApp extends Application {
-	public final static String FXML_FILE_PATH = "view/fxmlfile/";
+	public final static String FXML_FILE_PATH = "/fxmlfiles/";
 
 	private Stage primaryStage;
 	private BorderPane rootLayout;
