@@ -53,7 +53,7 @@ public class RootPaneController {
     	Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("JTaskLogger");
         alert.setHeaderText("About");
-        alert.setContentText("Author: Alessio Segantin\nWebsite: github.com/alessios18/JTasksLogger");
+        alert.setContentText("Author: Alessio Segantin\nGitHub:github.com/alessios18/JTasksLogger\nWebsite: alessios18.github.io/JTasksLogger/");
         alert.showAndWait();
     }
 
