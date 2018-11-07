@@ -12,11 +12,11 @@
    <children>
       <Label layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="92.0" text="Start date:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="30.0" />
       <DatePicker fx:id="startDate" layoutX="91.0" layoutY="30.0" AnchorPane.leftAnchor="91.0" AnchorPane.topAnchor="30.0" />
-      <DatePicker fx:id="endDate" layoutX="377.0" layoutY="30.0" AnchorPane.leftAnchor="377.0" AnchorPane.topAnchor="30.0" />
-      <Label layoutX="300.0" layoutY="30.0" prefHeight="26.0" prefWidth="92.0" text="End Date:" />
+      <DatePicker fx:id="endDate" layoutX="377.0" layoutY="30.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="30.0" />
+      <Label layoutX="300.0" layoutY="30.0" prefHeight="26.0" prefWidth="92.0" text="End Date:" AnchorPane.rightAnchor="208.0" />
       <TableView fx:id="taskTable" layoutX="15.0" layoutY="72.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="72.0">
         <columns>
-          <TableColumn fx:id="dateColumn" editable="false" prefWidth="75.0" text="Date" />
+          <TableColumn fx:id="dateColumn" editable="false" prefWidth="75.0" sortType="DESCENDING" text="Date" />
           <TableColumn fx:id="tasknameColumn" editable="false" prefWidth="75.0" text="Task Name" />
             <TableColumn fx:id="oursColumn" prefWidth="75.0" text="Ours" />
         </columns>
@@ -26,8 +26,8 @@
       </TableView>
       <ButtonBar layoutX="275.0" layoutY="400.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="30.0">
         <buttons>
-          <Button mnemonicParsing="false" text="Export" />
-            <Button mnemonicParsing="false" text="Cancel" />
+          <Button mnemonicParsing="false" onAction="#handleExport" text="Export" />
+            <Button mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
         </buttons>
       </ButtonBar>
    </children>

@@ -4,7 +4,9 @@
 package it.alessios.jtaskslogger.controller;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -18,6 +20,7 @@ import it.alessios.jtaskslogger.model.Task;
 import it.alessios.jtaskslogger.model.wrapper.RunningTaskDataWrapper;
 import it.alessios.jtaskslogger.model.wrapper.TaskDataWrapper;
 import it.alessios.jtaskslogger.util.DataStorage;
+import it.alessios.jtaskslogger.util.TimesheetExporter;
 import it.alessios.jtaskslogger.view.ExceptionDialog;
 import it.alessios.jtaskslogger.view.TaskListCell;
 import javafx.collections.FXCollections;
@@ -135,7 +138,12 @@ public class ExportDialogController {
 
 	@FXML
 	private void handleExport() {
-
+		TimesheetExporter exporter = new TimesheetExporter(mainApp, rowTask);
+		try {
+			exporter.exportCsvFile();
+		} catch (FileNotFoundException | UnsupportedEncodingException e) {
+			ExceptionDialog.showException(e);
+		}
 	}
 
 	/**

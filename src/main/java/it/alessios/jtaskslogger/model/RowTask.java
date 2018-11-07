@@ -23,6 +23,8 @@ public class RowTask {
 	private final StringProperty nameTask;
 	private final ObjectProperty<LocalDate> date;
 	
+	private final double MINUTES_TO_DECIMAL = 1.5;//= 1.666666667;
+	
 	public RowTask() {
 		super();
 		this.ours = new SimpleObjectProperty<Float>();
@@ -73,7 +75,27 @@ public class RowTask {
 	}
 	
 	public float millisecondToDecimalOurs(long milli) {
-		double ours = (((double)milli/1000)/60/60);
-		return (float) (Math.round(ours * 100.0) / 100.0);
+		double ours = oursConverter(milli);
+		return rouder(ours);
+	}
+	
+	private double oursConverter(double millisec) {
+		 return ((millisec/1000)/60/60);
+	}
+	
+	private float rouder(double ours) {
+		//(Math.round(ours * 100.0) / 100.0);
+		
+		
+		//ours = ((ours*60)*MINUTES_TO_DECIMAL)/100;
+		double d = ours - Math.floor(ours);
+		if(d>0) {
+			for(double i = 0.25;i<=60;i=i+0.25) {
+				if(d<=i) {
+					return (float) (ours-d+i);
+				}
+			}
+		}
+		return (float) ours;
 	}
 }

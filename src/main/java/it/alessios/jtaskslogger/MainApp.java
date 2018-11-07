@@ -100,6 +100,12 @@ public class MainApp extends Application {
 
 
 	}	
+	
+	
+
+	public Stage getPrimaryStage() {
+		return primaryStage;
+	}
 
 	public void showTaskOverview() {
 		try {
