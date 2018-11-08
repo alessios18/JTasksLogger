@@ -23,8 +23,6 @@ public class RowTask {
 	private final StringProperty nameTask;
 	private final ObjectProperty<LocalDate> date;
 	
-	private final double MINUTES_TO_DECIMAL = 1.5;//= 1.666666667;
-	
 	public RowTask() {
 		super();
 		this.ours = new SimpleObjectProperty<Float>();
