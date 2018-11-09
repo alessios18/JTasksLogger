@@ -20,7 +20,7 @@ public class DataStorage {
 	private static final String TASKS = "tasks.xml";
 	private static final String RUNNINGTASK = "runningtasks.xml";
 	
-	private static final String JTASKSLOGGER_FOLDER = ".JTasksTool_SVI"; 
+	private static final String JTASKSLOGGER_FOLDER = ".JTasksTool"; 
 
 	private static File tasks;
 
