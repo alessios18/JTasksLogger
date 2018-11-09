@@ -36,7 +36,7 @@ public class RunningTask {
 	public RunningTask() {
 		super();
 		this.idTask = new SimpleIntegerProperty();
-		this.idRunningTask = new SimpleIntegerProperty();
+		this.idRunningTask = new SimpleIntegerProperty(IdStacker.getInstance().getId());
 		this.life = new SimpleObjectProperty<Long>(0L);
 		this.creationDate = new SimpleObjectProperty<LocalDate>(LocalDate.now());
 	}
@@ -49,7 +49,7 @@ public class RunningTask {
 		this.creationDate = new SimpleObjectProperty<LocalDate>(LocalDate.now());
 	}
 	
-	@XmlJavaTypeAdapter(IdAdapter.class)	
+	//@XmlJavaTypeAdapter(IdAdapter.class)	
 	public void setIdRunningTask(int id) {
 		getIdRunningTaskProperty().set(id);
 	}

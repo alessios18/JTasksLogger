@@ -4,6 +4,7 @@
 package it.alessios.jtaskslogger.model;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.time.LocalDate;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -82,15 +83,15 @@ public class RowTask {
 	}
 	
 	private float rouder(double ours) {
-		//(Math.round(ours * 100.0) / 100.0);
-		
-		
-		//ours = ((ours*60)*MINUTES_TO_DECIMAL)/100;
 		double d = ours - Math.floor(ours);
 		if(d>0) {
 			for(double i = 0.25;i<=60;i=i+0.25) {
 				if(d<=i) {
-					return (float) (ours-d+i);
+					double decimal = i;
+					if((ours>1 && i != 0.25) && d<((i-0.25)+(i))/2) {
+						decimal = i-0.25;
+					}
+					return (float) (ours-d+decimal);
 				}
 			}
 		}

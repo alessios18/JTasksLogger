@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -26,6 +27,8 @@ public class TimesheetExporter {
 	private static final String EXT_CSV = "CSV";
 
 	private static final String CSV_SPARATOR = ";";
+	
+	private static DecimalFormat format=(DecimalFormat) DecimalFormat.getInstance();
 	
 	private static  HashMap<String, Object[]>extensinsMap;
 	static {
@@ -56,7 +59,7 @@ public class TimesheetExporter {
 		//Header
 		writer.println("Date"+CSV_SPARATOR+"Task Name"+CSV_SPARATOR+"Ours"+CSV_SPARATOR);
 		for (RowTask rowTask2 : rowTask) {
-			writer.println(DateUtil.format(rowTask2.getDate())+CSV_SPARATOR+rowTask2.getNameTask()+CSV_SPARATOR+rowTask2.getOurs()+CSV_SPARATOR);
+			writer.println(DateUtil.format(rowTask2.getDate())+CSV_SPARATOR+rowTask2.getNameTask()+CSV_SPARATOR+format.format(rowTask2.getOurs())+CSV_SPARATOR);
 		}
 		writer.close();
 	}

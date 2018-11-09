@@ -107,12 +107,10 @@ public class RunningTaskControllers {
 			runtask.pauseTask();
 			pause();
 			try {
-				mainApp.saveRunningTaskDataToFile(DataStorage.getinstance().getCurrentRunningTaskFile());
+				mainApp.saveRunningTaskDataToFile(DataStorage.getinstance().getRunningTaskFile());
 			} catch (UnsupportedOperatingSystemException e) {
-				// TODO Auto-generated catch block
 				ExceptionDialog.showException(e);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				ExceptionDialog.showException(e);
 			}
 		}

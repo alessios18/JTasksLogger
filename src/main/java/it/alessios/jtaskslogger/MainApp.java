@@ -84,11 +84,11 @@ public class MainApp extends Application {
 			primaryStage.show();
 
 			loadTaskDataFromFile(DataStorage.getinstance().getTaskFile());
-			loadRunningTaskDataToFile(DataStorage.getinstance().getCurrentRunningTaskFile());
+			loadRunningTaskDataToFile(DataStorage.getinstance().getRunningTaskFile());
 			primaryStage.setOnCloseRequest((WindowEvent event1) -> {
 				try {
 					saveTaskDataToFile(DataStorage.getinstance().getTaskFile());
-					saveRunningTaskDataToFile(DataStorage.getinstance().getCurrentRunningTaskFile());
+					saveRunningTaskDataToFile(DataStorage.getinstance().getRunningTaskFile());
 				} catch (UnsupportedOperatingSystemException | IOException e) {
 					// TODO Auto-generated catch block
 					ExceptionDialog.showException(e);

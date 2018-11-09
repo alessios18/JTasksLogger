@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 import javax.xml.bind.JAXBException;
 
@@ -25,6 +26,7 @@ import it.alessios.jtaskslogger.view.ExceptionDialog;
 import it.alessios.jtaskslogger.view.TaskListCell;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -62,8 +64,6 @@ public class ExportDialogController {
 
 	private ObservableList<RowTask> rowTask = FXCollections.observableArrayList();
 
-	private ObservableList<Task> taskData = FXCollections.observableArrayList();
-	private ObservableList<RunningTask> runningTaskData	 = FXCollections.observableArrayList();
 
 	public ExportDialogController(){
 
@@ -74,7 +74,7 @@ public class ExportDialogController {
 
 		startDate.setValue(LocalDate.now());
 		startDate.setOnAction(new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent event) {
 				handleChangeDate();
@@ -82,7 +82,7 @@ public class ExportDialogController {
 		});
 		endDate.setValue(LocalDate.now());
 		endDate.setOnAction(new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent event) {
 				handleChangeDate();
@@ -91,7 +91,7 @@ public class ExportDialogController {
 		extractRowTasksData(mainApp);
 		taskTable.setItems(rowTask);
 	}
-	
+
 	@FXML
 	private void initialize() {
 		// Initialize the person table with the two columns.
@@ -99,31 +99,27 @@ public class ExportDialogController {
 				cellData -> cellData.getValue().getNameTaskProperty());
 		dateColumn.setCellValueFactory(
 				cellData -> cellData.getValue().getDateProperty());
-		
+
 		oursColumn.setCellValueFactory(
 				cellData -> cellData.getValue().getOursProperty());
 
 	}
 
+	@SuppressWarnings("restriction")
 	public void extractRowTasksData(MainApp mainApp) {
-		try {
-			rowTask.clear();
-			ArrayList<File> files = DataStorage.getinstance().getFilesByDates(startDate.getValue(), endDate.getValue());
-			TaskDataWrapper wrapper = mainApp.loadTask(DataStorage.getinstance().getTaskFile());
-			if(wrapper != null) {
-				taskData.clear();
-				taskData.addAll(wrapper.getTasks());
+		rowTask.clear();
+		ObservableList<RunningTask> runningTasks = mainApp.getRunningTaskData();
+		FilteredList<RunningTask> filteredData = new FilteredList<RunningTask>(mainApp.getRunningTaskData(),new Predicate<RunningTask>() {
+			@Override
+			public boolean test(RunningTask t) {
+				LocalDate start = startDate.getValue();
+				LocalDate end = endDate.getValue();
+				LocalDate creation = t.getCreationDate();
+				return (creation.isAfter(start) && creation.isBefore(end)) || creation.isEqual(start) || creation.isEqual(end);
 			}
-			runningTaskData.clear();
-			for (File file : files) {
-				RunningTaskDataWrapper runWrapper = mainApp.loadRunningTask(file);
-				runningTaskData.addAll(runWrapper.getRunningTasks());
-			}
-			for(int r = 0; r< runningTaskData.size();r++) {
-				rowTask.add(new RowTask(mainApp.getTaskById(runningTaskData.get(r).getIdTask(), taskData), runningTaskData.get(r))); 
-			}
-		} catch (UnsupportedOperatingSystemException | IOException | JAXBException e) {
-			ExceptionDialog.showException(e);
+		});
+		for (RunningTask runningTask : filteredData) {
+			rowTask.add(new RowTask(mainApp.getTaskById(runningTask.getIdTask()), runningTask));
 		}
 	}
 

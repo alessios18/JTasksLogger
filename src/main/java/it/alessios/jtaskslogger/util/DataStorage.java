@@ -20,7 +20,7 @@ public class DataStorage {
 	private static final String TASKS = "tasks.xml";
 	private static final String RUNNINGTASK = "runningtasks.xml";
 	
-	private static final String JTASKSLOGGER_FOLDER = ".JTasksTool"; 
+	private static final String JTASKSLOGGER_FOLDER = ".JTasksTool_SVI"; 
 
 	private static File tasks;
 
@@ -67,20 +67,15 @@ public class DataStorage {
 		return new File(getRootPath()+TASKS);
 	}
 	
-	public File getCurrentRunningTaskFile() {
-		LocalDate now = LocalDate.now();
-		return new File(getRootPath()+DateUtil.fileFormat(now)+"_"+RUNNINGTASK);
-	}
-	
-	public File getCurrentRunningTaskFile(LocalDate date) {
-		return new File(getRootPath()+DateUtil.fileFormat(date)+"_"+RUNNINGTASK);
+	public File getRunningTaskFile() {
+		return new File(getRootPath()+RUNNINGTASK);
 	}
 	
 	public ArrayList<File> getFilesByDates(LocalDate startDate,LocalDate endDate){
 		ArrayList<File> files = new ArrayList<>();
 		LocalDate current = startDate;
 		while(current.isEqual(endDate) || current.isBefore(endDate)) {
-			File file = getCurrentRunningTaskFile(current);
+			File file = getRunningTaskFile();
 			if(file.exists()) {
 				files.add(file);
 			}

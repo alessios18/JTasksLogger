@@ -6,6 +6,7 @@ package it.alessios.jtaskslogger.controller;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 import it.alessios.jtaskslogger.MainApp;
 import it.alessios.jtaskslogger.exceptions.UnsupportedOperatingSystemException;
@@ -22,6 +23,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.util.Callback;
+import javafx.collections.transformation.FilteredList;
 
 /**
  * @author alessio
@@ -55,7 +57,6 @@ public class TaskOverViewController {
 
 			@Override
 			public ListCell<RunningTask> call(ListView<RunningTask> param) {
-				// TODO Auto-generated method stub
 				return new TaskListCell(mainApp);
 			}
 
@@ -73,7 +74,14 @@ public class TaskOverViewController {
 
 		// Add observable list data to the table
 		taskTable.setItems(mainApp.getTaskData());
-		taskList.setItems(mainApp.getRunningTaskData());
+		FilteredList<RunningTask> filteredData = new FilteredList<RunningTask>(mainApp.getRunningTaskData(),new Predicate<RunningTask>() {
+			@Override
+			public boolean test(RunningTask t) {
+				LocalDate now = LocalDate.now();
+				return t.getCreationDate().isEqual(now);
+			}
+		});
+		taskList.setItems(filteredData);
 	}
 
 	@FXML
@@ -112,10 +120,8 @@ public class TaskOverViewController {
 			try {
 				mainApp.saveTaskDataToFile(DataStorage.getinstance().getTaskFile());
 			} catch (UnsupportedOperatingSystemException e) {
-				// TODO Auto-generated catch block
 				ExceptionDialog.showException(e);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				ExceptionDialog.showException(e);
 			}
 		}
