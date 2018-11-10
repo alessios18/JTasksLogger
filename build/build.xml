@@ -28,11 +28,6 @@
 		<mkdir dir="project" />
 		<copy todir="project">
 			<fileset dir="/home/alessio/Projects/java/JTaskLogger/JTasksLogger">
-				<include name="src/test/java/**" />
-			</fileset>
-		</copy>
-		<copy todir="project">
-			<fileset dir="/home/alessio/Projects/java/JTaskLogger/JTasksLogger">
 				<include name="src/main/java/**" />
 			</fileset>
 		</copy>
@@ -56,15 +51,6 @@
 				<include name="junit-3.8.1.jar"/>
 			</fileset>
 		</copy>
-	
-		<!-- Copy project references -->
-	
-		<!-- Copy project sources itself -->
-		<copy todir="build/src">
-			<fileset dir="project/src/test/java">
-				<include name="**/*"/>
-			</fileset>
-		</copy>
 		<copy todir="build/src">
 			<fileset dir="project/src/main/resources">
 				<include name="**/*"/>
@@ -86,9 +72,6 @@
 	
 		<!-- Copy over none Java-Files -->
 		<copy todir="build/classes">
-		<fileset dir="project/src/test/java">
-			<exclude name="**/*.java"/>
-		</fileset>
 		<fileset dir="project/src/main/resources">
 			<exclude name="**/*.java"/>
 		</fileset>

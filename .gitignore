@@ -3,3 +3,9 @@
 **/.settings/
 **/target/
 /target
+build/build/
+build/deploy/
+build/dist/
+build/externalLibs/
+build/project/
+
