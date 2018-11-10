@@ -115,7 +115,8 @@ public class ExportDialogController {
 				LocalDate start = startDate.getValue();
 				LocalDate end = endDate.getValue();
 				LocalDate creation = t.getCreationDate();
-				return (creation.isAfter(start) && creation.isBefore(end)) || creation.isEqual(start) || creation.isEqual(end);
+				boolean dateCheck = (creation.isAfter(start) && creation.isBefore(end)) || creation.isEqual(start) || creation.isEqual(end); 
+				return dateCheck && t.getLife()>0;
 			}
 		});
 		for (RunningTask runningTask : filteredData) {

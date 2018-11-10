@@ -88,7 +88,7 @@ public class RowTask {
 			for(double i = 0.25;i<=60;i=i+0.25) {
 				if(d<=i) {
 					double decimal = i;
-					if((ours>1 && i != 0.25) && d<((i-0.25)+(i))/2) {
+					if(((ours-d)!=0.0 && i != 0.25) && d<((i-0.25)+(i))/2) {
 						decimal = i-0.25;
 					}
 					return (float) (ours-d+decimal);

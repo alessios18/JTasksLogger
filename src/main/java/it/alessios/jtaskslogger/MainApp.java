@@ -100,8 +100,8 @@ public class MainApp extends Application {
 
 
 	}	
-	
-	
+
+
 
 	public Stage getPrimaryStage() {
 		return primaryStage;
@@ -179,7 +179,7 @@ public class MainApp extends Application {
 		}
 		return null;
 	}
-	
+
 	public Task getTaskById(int id,ObservableList<Task> list) {
 		for(int i=0;i<list.size();i++){
 			if(list.get(i).getIdTask()==id) {
@@ -254,7 +254,7 @@ public class MainApp extends Application {
 			TaskDataWrapper wrapper = loadTask(file);
 
 			taskData.clear();
-			if(wrapper.getTasks()!= null) {
+			if(wrapper != null && wrapper.getTasks()!= null) {
 				taskData.addAll(wrapper.getTasks());
 			}
 
@@ -273,9 +273,12 @@ public class MainApp extends Application {
 				.newInstance(TaskDataWrapper.class);
 		Unmarshaller um = context.createUnmarshaller();
 
-		// Reading XML from the file and unmarshalling.
-		TaskDataWrapper wrapper = (TaskDataWrapper) um.unmarshal(file);
-		return wrapper;
+		if(file.exists()) {
+			// Reading XML from the file and unmarshalling.
+			TaskDataWrapper wrapper = (TaskDataWrapper) um.unmarshal(file);
+			return wrapper;
+		}
+		return null;
 	}
 
 	public void saveRunningTaskDataToFile(File file) {
@@ -307,10 +310,9 @@ public class MainApp extends Application {
 			RunningTaskDataWrapper wrapper = loadRunningTask(file);
 
 			runningTaskData.clear();
-			if(wrapper.getRunningTasks() != null) {
+			if(wrapper != null && wrapper.getRunningTasks() != null) {
 				runningTaskData.addAll(wrapper.getRunningTasks());
 			}
-
 		} catch (Exception e) { // catches ANY exception
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error");
@@ -326,9 +328,12 @@ public class MainApp extends Application {
 				.newInstance(RunningTaskDataWrapper.class);
 		Unmarshaller um = context.createUnmarshaller();
 
-		// Reading XML from the file and unmarshalling.
-		RunningTaskDataWrapper wrapper = (RunningTaskDataWrapper) um.unmarshal(file);
-		return wrapper;
+		if(file.exists()) {
+			// Reading XML from the file and unmarshalling.
+			RunningTaskDataWrapper wrapper = (RunningTaskDataWrapper) um.unmarshal(file);
+			return wrapper;
+		}
+		return null;
 	}
 
 }
