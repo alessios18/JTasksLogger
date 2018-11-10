@@ -8,5 +8,4 @@ pipelines:
         script: # Modify the commands below to build your repository.
           - mvn clean
           - mvn -B verify # -B batch mode makes Maven less verbose
-          - mvn install 
-	  - mvn jfx:native
+          - mvn install
