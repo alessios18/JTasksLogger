@@ -18,13 +18,7 @@
 		<delete dir="projectRefs" />
 	
 		<mkdir dir="externalLibs" />
-	
-		<copy todir="externalLibs">
-			<fileset dir="/home/alessio/.m2/repository/junit/junit/3.8.1">
-				<filename name="junit-3.8.1.jar"/>
-			</fileset>
-		</copy>
-	
+		
 		<mkdir dir="project" />
 		<copy todir="project">
 			<fileset dir="/home/alessio/Projects/java/JTaskLogger/JTasksLogger">
@@ -45,12 +39,6 @@
 		<mkdir dir="build/libs" />
 		<mkdir dir="build/classes" />
 	
-		<!-- Copy project-libs references -->
-		<copy todir="build/libs">
-			<fileset dir="externalLibs">
-				<include name="junit-3.8.1.jar"/>
-			</fileset>
-		</copy>
 		<copy todir="build/src">
 			<fileset dir="project/src/main/resources">
 				<include name="**/*"/>

@@ -3,6 +3,9 @@
  */
 package it.alessios.jtaskslogger.controller;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
 
 import it.alessios.jtaskslogger.MainApp;
@@ -17,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -56,6 +60,7 @@ public class RunningTaskControllers {
 	}
 
 
+	@SuppressWarnings("restriction")
 	public void setMainAppRunningTask(MainApp mainApp,RunningTask runtask) {
 		this.mainApp = mainApp;
 		this.runtask = runtask;
@@ -64,6 +69,15 @@ public class RunningTaskControllers {
 		toggle.setText("");
 		taskName.setText(mainApp.getTaskById(runtask.getIdTask()).getNameTask());
 		taskLife.setText(runtask.getFormattedLife(runtask.getLife()));
+		mainPane.setOnMouseClicked(me -> {
+			if(me.getButton() == MouseButton.SECONDARY) {
+				StringSelection stringSelection = new StringSelection(taskName.getText());
+				Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+				clipboard.setContents(stringSelection, null);
+				
+				
+			}
+		});
 		if(runtask.isRunning()) {
 			play();
 		}
@@ -115,6 +129,6 @@ public class RunningTaskControllers {
 			}
 		}
 	}
-	
-	
+
+
 }

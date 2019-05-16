@@ -46,10 +46,8 @@ public class MainApp extends Application {
 		try {
 			DataStorage.getinstance().checkFiles();
 		} catch (UnsupportedOperatingSystemException e) {
-			// TODO Auto-generated catch block
 			ExceptionDialog.showException(e);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			ExceptionDialog.showException(e);
 		}
 	}
