@@ -15,13 +15,11 @@ import it.alessios.jtaskslogger.model.Task;
 import it.alessios.jtaskslogger.util.DataStorage;
 import it.alessios.jtaskslogger.view.ExceptionDialog;
 import it.alessios.jtaskslogger.view.TaskListCell;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.util.Callback;
 import javafx.collections.transformation.FilteredList;
 
@@ -39,6 +37,8 @@ public class TaskOverViewController {
 	private TableColumn<Task, LocalDate> creationDateColumn;
 	@FXML
 	private ListView<RunningTask> taskList;
+	@FXML
+	private TextField taskFilter;
 
 	// Reference to the main application.
 	private MainApp mainApp;
@@ -61,6 +61,13 @@ public class TaskOverViewController {
 			}
 
 
+		});
+
+		taskFilter.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				filterTask(newValue);
+			}
 		});
 	}
 
@@ -124,6 +131,20 @@ public class TaskOverViewController {
 			} catch (IOException e) {
 				ExceptionDialog.showException(e);
 			}
+		}
+	}
+
+	private void filterTask(String filter) {
+		if(filter != null && !filter.isEmpty()){
+			FilteredList<Task> filteredData = new FilteredList<Task>(mainApp.getTaskData(),new Predicate<Task>() {
+				@Override
+				public boolean test(Task t) {
+					return t.getNameTask().contains(filter);
+				}
+			});
+			taskTable.setItems(filteredData);
+		}else{
+			taskTable.setItems(mainApp.getTaskData());
 		}
 	}
 }

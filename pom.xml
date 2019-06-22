@@ -15,7 +15,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.name>JTasksLogger</project.name>
 		<project.namerun>${project.name}_run</project.namerun>
-		<project.version>1.0.1-SNAPSHOT</project.version>
+		<project.version>1.0.2-SNAPSHOT</project.version>
 		<project.mainClass>it.alessios.jtaskslogger.MainApp</project.mainClass>
 		<project.resouces>/src/main/resouces</project.resouces>
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -93,6 +93,27 @@
 					</bundleArguments>
 					<additionalAppResources>${project.resouces}</additionalAppResources>
 				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>install</phase>
+						<configuration>
+							<tasks>
+								<delete>
+									<fileset dir="bin"/>
+								</delete>
+								<copydir src="target/"
+										 dest="bin/"
+										 includes="**/*.jar"/>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

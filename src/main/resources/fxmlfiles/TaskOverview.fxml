@@ -5,15 +5,16 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="it.alessios.jtaskslogger.controller.TaskOverViewController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.alessios.jtaskslogger.controller.TaskOverViewController">
    <children>
       <SplitPane dividerPositions="0.37755102040816324" layoutX="200.0" layoutY="70.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TableView fx:id="taskTable" layoutX="9.0" layoutY="44.0" prefHeight="334.0" prefWidth="218.0" AnchorPane.bottomAnchor="54.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="taskTable" layoutX="9.0" layoutY="31.0"  prefHeight="303.0" prefWidth="219.0" AnchorPane.bottomAnchor="54.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0">
                     <columns>
                       <TableColumn fx:id="firstNameColumn" prefWidth="75.0" text="Task Name" />
                         <TableColumn fx:id="creationDateColumn" prefWidth="75.0" text="Creation Date" />
@@ -24,6 +25,7 @@
                   </TableView>
                   <Button layoutX="78.0" layoutY="361.0" mnemonicParsing="false" onAction="#handleAddRunningTask" text="Add selected Task" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" />
                   <Button layoutX="78.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleNewTask" text="Create new Task" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" />
+                  <TextField fx:id="taskFilter" layoutY="2.0" promptText="Filter tasks" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">

@@ -240,6 +240,30 @@ public class MainApp extends Application {
 		}
 	}
 
+	public void filterTaskData(File file) {
+		try {
+			JAXBContext context = JAXBContext
+					.newInstance(TaskDataWrapper.class);
+			Marshaller m = context.createMarshaller();
+			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+			// Wrapping our person data.
+			TaskDataWrapper wrapper = new TaskDataWrapper();
+			wrapper.setTasks(taskData);
+
+			// Marshalling and saving XML to the file.
+			m.marshal(wrapper, file);
+
+		} catch (Exception e) { // catches ANY exception
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error");
+			alert.setHeaderText("Could not save data");
+			alert.setContentText("Could not save data to file:\n" + file.getPath());
+
+			alert.showAndWait();
+		}
+	}
+
 
 	/**
 	 * Loads tasks data from the specified file. The current person data will
