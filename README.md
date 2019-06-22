@@ -1,3 +1,6 @@
+[![CircleCI](https://circleci.com/gh/alessios18/JTasksLogger.svg?style=svg)](https://circleci.com/gh/alessios18/JTasksLogger)
+
+
 ## JTasksLogger
 
 
