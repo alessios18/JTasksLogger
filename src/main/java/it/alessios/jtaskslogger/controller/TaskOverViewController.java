@@ -15,6 +15,7 @@ import it.alessios.jtaskslogger.model.Task;
 import it.alessios.jtaskslogger.util.DataStorage;
 import it.alessios.jtaskslogger.view.ExceptionDialog;
 import it.alessios.jtaskslogger.view.TaskListCell;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -57,6 +58,7 @@ public class TaskOverViewController {
 
 			@Override
 			public ListCell<RunningTask> call(ListView<RunningTask> param) {
+
 				return new TaskListCell(mainApp);
 			}
 
@@ -85,7 +87,11 @@ public class TaskOverViewController {
 			@Override
 			public boolean test(RunningTask t) {
 				LocalDate now = LocalDate.now();
-				return t.getCreationDate().isEqual(now);
+				if(t.getCreationDate().isEqual(now)){
+					addedTask.add(t.getIdTask());
+					return true;
+				}
+				return false;
 			}
 		});
 		taskList.setItems(filteredData);
@@ -94,9 +100,11 @@ public class TaskOverViewController {
 	@FXML
 	private void handleAddRunningTask() {
 		int selectedIndex = taskTable.getSelectionModel().getSelectedIndex();
+
 		if(selectedIndex > -1) {
-			if(checkAlreadyAdded(selectedIndex)) {
-				mainApp.getRunningTaskData().add(new RunningTask(mainApp.getTaskData().get(selectedIndex)));
+			Task selectedTask = taskTable.getItems().get(selectedIndex);
+			if(checkAlreadyAdded(selectedTask.getIdTask())) {
+				mainApp.getRunningTaskData().add(new RunningTask(selectedTask));
 			}else {
 				Alert alert = new Alert(AlertType.ERROR);
 	            alert.setTitle("Task already added");
@@ -108,13 +116,13 @@ public class TaskOverViewController {
 		}
 	}
 
-	public boolean checkAlreadyAdded(int index) {
+	public boolean checkAlreadyAdded(Integer idTask) {
 		for (Integer integer : addedTask) {
-			if(index == integer) {
+			if(idTask == integer) {
 				return false;
 			}
 		}
-		addedTask.add(index);
+		addedTask.add(idTask);
 		return true;
 	}
 
